@@ -21,12 +21,12 @@ public class ProductDAOImpl implements ProductDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Product findByID(int prodId) {
+	public List<Product> findByID(int prodId) {
 
 		String hql = "from products where id="+prodId;
 		List<Product> resultSet = sessionFactory.openSession().createQuery(hql).list();
 		sessionFactory.close();
-		return resultSet.get(0);
+		return resultSet;
 		// return null;
 	}
 

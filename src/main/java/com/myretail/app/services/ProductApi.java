@@ -12,28 +12,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myretail.app.dao.ProductDAOImpl;
 import com.myretail.app.model.Product;
+import com.myretail.app.services.response.ProductApiResponse;
 
 @Controller
 @RequestMapping("/api/Product/")
 public class ProductApi {
 	@Autowired
 	ProductDAOImpl pd;
+	@Autowired
+	ProductApiResponse response;  
 
 	/*url example: http://localhost:8080/app/api/Product/getProductByID?id=1*/	
 	
 	@RequestMapping(value = "/getProductByID", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public Product getProductById(@RequestParam("id") int id) {
-
-		return pd.findByID(id);
+	public ProductApiResponse getProductById(@RequestParam("id") int id) {
+		response.setProducts(pd.findByID(id));
+		return response ;
 	}
 
 	/*url example: http://localhost:8080/app/api/Product/getProducts*/	
 	@RequestMapping(value = "/getProducts", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public List<Product> getAllProduct() {
-		List<Product> result=pd.returnAll();
-		return result;
+	public ProductApiResponse getAllProduct() {
+		response.setProducts(pd.returnAll());
+		return response;
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myretail.app.dao.ProductDAO;
 import com.myretail.app.dao.ProductDAOImpl;
 import com.myretail.app.model.Product;
 import com.myretail.app.services.response.ProductApiResponse;
@@ -18,7 +19,7 @@ import com.myretail.app.services.response.ProductApiResponse;
 @RequestMapping("/api/Product/")
 public class ProductApi {
 	@Autowired
-	ProductDAOImpl pd;
+	ProductDAO pd;
 	@Autowired
 	ProductApiResponse response;  
 
